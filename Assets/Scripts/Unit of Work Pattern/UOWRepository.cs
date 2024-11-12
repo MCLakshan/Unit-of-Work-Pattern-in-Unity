@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 public class UOWRepository : MonoBehaviour {
-    public UOWJsonDataContext context;
+    public UOWDataContext context;
     
     private List<UOWItem> Entities => context.Set();
 

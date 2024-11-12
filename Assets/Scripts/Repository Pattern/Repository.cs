@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 public class Repository : MonoBehaviour {
-    public JsonDataContext context;
+    public DataContext context;
     
     private List<Item> Entities => context.Set();
 
