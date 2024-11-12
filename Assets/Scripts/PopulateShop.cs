@@ -1,14 +1,7 @@
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
-
-[System.Serializable]
-public class ItemList
-{
-    public List<Item> items;
-}
+using UnityEngine.UI;
 
 public class PopulateShop : MonoBehaviour {
     
@@ -18,18 +11,13 @@ public class PopulateShop : MonoBehaviour {
     [Header("Items")] 
     public Items items = null;
 
-    
+    [Header("Tile Settings")]
     [SerializeField] private GameObject itemTilePrefab;  // Reference to the Item Tile Prefab
     [SerializeField] private Transform itemsParent;
-    
     public float xOffset = 150f;  // Set this to the width of each tile + desired space between them
-    
-    // private List<Item> _items = new List<Item>();
 
     private void Start() {
-        // LoadItemsFromJson();
         PopulateUI();
-        // BuyItem();
     }
 
     private async void PopulateUI() {
@@ -53,22 +41,27 @@ public class PopulateShop : MonoBehaviour {
                 // Set the values in the prefab
                 itemNameText.text = item.Name;
                 itemPriceText.text = "$" + item.Price.ToString();
+                
+                // Add listener to Buy button with item ID
+                int currentItemId = item.ID; // Capture the correct item ID for the button
+                Button buyButton = newItemTile.GetComponentInChildren<Button>();
+                buyButton.onClick.AddListener(() => BuyItem(currentItemId)); // Pass item ID to BuyItem
             }
         }
     }
 
-    public async void BuyItem()
+    public async void BuyItem(int currentItemId)
     {
-        var itemsInJson = await items.GetAllItems();
+        Debug.Log("Buying item " + currentItemId);
+        items.Delete(currentItemId);
+        await items.Save();
+        ClearTiles();
+        PopulateUI();
+    }
 
-        
-        if (itemsInJson != null)
-        {
-            Debug.Log("itemsInJson not null --> " + itemsInJson.Count);
-        }
-        else
-        {
-            Debug.Log("itemsInJson is null");
+    public void ClearTiles() {
+        foreach (Transform child in itemsParent) {
+            Destroy(child.gameObject);
         }
     }
     
