@@ -3,6 +3,7 @@ using System.IO;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class ItemList
@@ -53,23 +54,30 @@ public class PopulateShop : MonoBehaviour {
                 // Set the values in the prefab
                 itemNameText.text = item.Name;
                 itemPriceText.text = "$" + item.Price.ToString();
+                
+                // Add listener to Buy button with item ID
+                int currentItemId = item.ID; // Capture the correct item ID for the button
+                Button buyButton = newItemTile.GetComponentInChildren<Button>();
+                buyButton.onClick.AddListener(() => BuyItem(currentItemId)); // Pass item ID to BuyItem
             }
         }
     }
 
-    public async void BuyItem()
+    public void BuyItem(int currentItemId)
     {
-        var itemsInJson = await items.GetAllItems();
-
+        // var itemsInJson = await items.GetAllItems();
+        //
+        //
+        // if (itemsInJson != null)
+        // {
+        //     Debug.Log("itemsInJson not null --> " + itemsInJson.Count);
+        // }
+        // else
+        // {
+        //     Debug.Log("itemsInJson is null");
+        // }
         
-        if (itemsInJson != null)
-        {
-            Debug.Log("itemsInJson not null --> " + itemsInJson.Count);
-        }
-        else
-        {
-            Debug.Log("itemsInJson is null");
-        }
+        Debug.Log("Buying item " + currentItemId);
     }
     
 }
