@@ -20,11 +20,16 @@ public class Repository : MonoBehaviour {
             Debug.Log("Entities ---> " + context.data.Items.Count);
         }
     }
+
+    public float GetPrice(int id) {
+        var i = Entities.Find(x => x.ID == id);
+        return i.Price;
+    }
     
     public void Add(Item item) {
         Entities.Add(item);
     }
-
+    
     public void Delete(int id) {
         var item = Entities.Find(x => x.ID == id);
         if (item != null) {

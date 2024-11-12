@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PopulateShop : MonoBehaviour {
     
     [Header("Player")]
-    public Player player = new Player("Player", 1000);
+    public Player player = new Player("Player_001", 1000);
 
     [Header("Items")] 
     public Items items = null;
@@ -16,6 +17,11 @@ public class PopulateShop : MonoBehaviour {
     [SerializeField] private Transform itemsParent;
     public float xOffset = 150f;  // Set this to the width of each tile + desired space between them
 
+    [Header("Player UI Settings")]
+    [SerializeField] private TextMeshProUGUI playerNameText;
+    [FormerlySerializedAs("playerMoneyText")] 
+    [SerializeField] private TextMeshProUGUI playerMoneyAmountText;
+    
     private void Start() {
         PopulateUI();
     }
@@ -48,15 +54,28 @@ public class PopulateShop : MonoBehaviour {
                 buyButton.onClick.AddListener(() => BuyItem(currentItemId)); // Pass item ID to BuyItem
             }
         }
+        
+        // Player UI
+        playerNameText.text = player.Name;
+        playerMoneyAmountText.text = player.Money.ToString();
     }
 
     public async void BuyItem(int currentItemId)
     {
         Debug.Log("Buying item " + currentItemId);
-        items.Delete(currentItemId);
-        await items.Save();
-        ClearTiles();
-        PopulateUI();
+        
+        float price = items.GetPrice(currentItemId);
+        if (player.Money < price) {
+            Debug.Log("Not enough money");
+        }
+        else {
+            player.Money -= price;
+            items.Delete(currentItemId);
+            await items.Save();
+            ClearTiles();
+            PopulateUI();
+        }
+        
     }
 
     public void ClearTiles() {
