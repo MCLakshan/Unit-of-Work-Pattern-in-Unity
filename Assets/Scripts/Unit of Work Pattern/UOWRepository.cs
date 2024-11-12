@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Repository : MonoBehaviour {
-    public DataContext context;
+public class UOWRepository : MonoBehaviour {
+    public UOWDataContext context;
     
-    private List<Item> Entities => context.Set();
+    private List<UOWItem> Entities => context.Set();
 
-    public async Task<List<Item>> GetAllItems() {
+    public async Task<List<UOWItem>> GetAllItems() {
         await LD();  
         return Entities;  
     }
@@ -26,7 +26,7 @@ public class Repository : MonoBehaviour {
         return i.Price;
     }
     
-    public void Add(Item item) {
+    public void Add(UOWItem item) {
         Entities.Add(item);
     }
     
