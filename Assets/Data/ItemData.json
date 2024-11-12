@@ -1,19 +1,30 @@
 {
     "Items": [
         {
+            "ID": 1,
+            "Name": "Sword",
+            "Price": 100
+        },
+        {
             "ID": 2,
             "Name": "Shield",
-            "Price": 150.0
+            "Price": 150
+        },
+        {
+            "ID": 3,
+            "Name": "Potion",
+            "Price": 50
         },
         {
             "ID": 4,
             "Name": "Bow",
-            "Price": 120.0
+            "Price": 120
         },
         {
             "ID": 5,
             "Name": "Helmet",
-            "Price": 75.0
+            "Price": 75
         }
     ]
 }
+
