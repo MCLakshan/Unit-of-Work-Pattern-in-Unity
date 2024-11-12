@@ -170,7 +170,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -710.69415, y: 258.3883}
-  m_SizeDelta: {x: 300, y: 400}
+  m_SizeDelta: {x: 298.9562, y: 403.6701}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5389517717579177480
 GameObject:
