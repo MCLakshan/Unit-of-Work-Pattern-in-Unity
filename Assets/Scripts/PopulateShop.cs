@@ -55,7 +55,14 @@ public class PopulateShop : MonoBehaviour {
         Debug.Log("Buying item " + currentItemId);
         items.Delete(currentItemId);
         await items.Save();
+        ClearTiles();
+        PopulateUI();
+    }
 
+    public void ClearTiles() {
+        foreach (Transform child in itemsParent) {
+            Destroy(child.gameObject);
+        }
     }
     
 }
