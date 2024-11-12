@@ -3,17 +3,17 @@
         {
             "ID": 1,
             "Name": "Sword",
-            "Price": 100
+            "Price": 100.0
         },
         {
             "ID": 2,
             "Name": "Shield",
-            "Price": 150
+            "Price": 150.0
         },
         {
             "ID": 3,
             "Name": "Potion",
-            "Price": 50
+            "Price": 50.0
         },
         {
             "ID": 4,
@@ -23,7 +23,7 @@
         {
             "ID": 5,
             "Name": "Helmet",
-            "Price": 75
+            "Price": 75.0
         }
     ]
 }
