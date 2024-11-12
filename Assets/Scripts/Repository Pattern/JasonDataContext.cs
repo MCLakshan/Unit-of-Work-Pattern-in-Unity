@@ -5,7 +5,6 @@ using UnityEngine;
 public class JsonDataContext : DataContext {
     
     // public GameData data = new GameData(); ---> public List<Item> Items; (GameData)
-    
     public string filePath = "Assets/Data/ItemData.json";
     
     public override async Task Load() {
@@ -27,7 +26,7 @@ public class JsonDataContext : DataContext {
         var json = JsonUtility.ToJson(data, true);
 
         // Write JSON data to the file asynchronously
-        using (var writer = new StreamWriter(filePath)) {
+        using (var writer = new StreamWriter(filePath)) { // Accessing a data stream
             await writer.WriteAsync(json);
         }
 
