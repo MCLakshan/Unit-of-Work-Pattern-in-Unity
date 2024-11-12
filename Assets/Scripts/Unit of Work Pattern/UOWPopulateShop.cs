@@ -1,16 +1,18 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using System.Collections;
 
 public class UOWPopulateShop : MonoBehaviour {
     
     [Header("Player")]
     public UOWPlayer player = new UOWPlayer("Player_001", 1000);
 
-    [Header("Items")] 
-    public UOWItems items = null;
+    // [Header("Items")] 
+    // public UOWItems items = null;
 
     [Header("Tile Settings")]
     [SerializeField] private GameObject itemTilePrefab;  // Reference to the Item Tile Prefab
@@ -22,13 +24,16 @@ public class UOWPopulateShop : MonoBehaviour {
     [FormerlySerializedAs("playerMoneyText")] 
     [SerializeField] private TextMeshProUGUI playerMoneyAmountText;
     
+    [Header("Unit of Work Settings")]
+    public UnitOfWok unitOfWok;
+    
     private void Start() {
         PopulateUI();
     }
 
     private async void PopulateUI() {
         int index = 0;
-        var itemsInJson = await items.GetAllItems();
+        var itemsInJson = await unitOfWok.items.GetAllItems();
 
         if (itemsInJson != null) {
             foreach (UOWItem item in itemsInJson) {
@@ -51,7 +56,8 @@ public class UOWPopulateShop : MonoBehaviour {
                 // Add listener to Buy button with item ID
                 int currentItemId = item.ID; // Capture the correct item ID for the button
                 Button buyButton = newItemTile.GetComponentInChildren<Button>();
-                buyButton.onClick.AddListener(() => BuyItem(currentItemId)); // Pass item ID to BuyItem
+                // Add a listener to the button to call the async wrapper
+                buyButton.onClick.AddListener(() => StartCoroutine(BuyItemWrapper(currentItemId)));
             }
         }
         
@@ -59,19 +65,26 @@ public class UOWPopulateShop : MonoBehaviour {
         playerNameText.text = player.Name;
         playerMoneyAmountText.text = player.Money.ToString();
     }
+    
+    // Async Wrapper as a Coroutine
+    private IEnumerator BuyItemWrapper(int itemId)
+    {
+        yield return BuyItem(itemId); // Waits for async method to complete
+    }
 
-    public async void BuyItem(int currentItemId)
+    public async Task BuyItem(int currentItemId)
     {
         Debug.Log("Buying item " + currentItemId);
         
-        float price = items.GetPrice(currentItemId);
+        float price = unitOfWok.items.GetPrice(currentItemId);
         if (player.Money < price) {
             Debug.Log("Not enough money");
         }
         else {
             player.Money -= price;
-            items.Delete(currentItemId);
-            await items.Save();
+            unitOfWok.items.Delete(currentItemId);
+            // await items.Save();
+            await unitOfWok.UOWSave();
             ClearTiles();
             PopulateUI();
         }
