@@ -1,15 +1,7 @@
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine.UI;
-
-[System.Serializable]
-public class ItemList
-{
-    public List<Item> items;
-}
 
 public class PopulateShop : MonoBehaviour {
     
@@ -19,18 +11,13 @@ public class PopulateShop : MonoBehaviour {
     [Header("Items")] 
     public Items items = null;
 
-    
+    [Header("Tile Settings")]
     [SerializeField] private GameObject itemTilePrefab;  // Reference to the Item Tile Prefab
     [SerializeField] private Transform itemsParent;
-    
     public float xOffset = 150f;  // Set this to the width of each tile + desired space between them
-    
-    // private List<Item> _items = new List<Item>();
 
     private void Start() {
-        // LoadItemsFromJson();
         PopulateUI();
-        // BuyItem();
     }
 
     private async void PopulateUI() {
@@ -63,21 +50,12 @@ public class PopulateShop : MonoBehaviour {
         }
     }
 
-    public void BuyItem(int currentItemId)
+    public async void BuyItem(int currentItemId)
     {
-        // var itemsInJson = await items.GetAllItems();
-        //
-        //
-        // if (itemsInJson != null)
-        // {
-        //     Debug.Log("itemsInJson not null --> " + itemsInJson.Count);
-        // }
-        // else
-        // {
-        //     Debug.Log("itemsInJson is null");
-        // }
-        
         Debug.Log("Buying item " + currentItemId);
+        items.Delete(currentItemId);
+        await items.Save();
+
     }
     
 }

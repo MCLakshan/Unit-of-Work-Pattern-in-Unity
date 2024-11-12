@@ -1,4 +1,3 @@
-public class Items : Repository
-{
+public class Items : Repository {
     
 }

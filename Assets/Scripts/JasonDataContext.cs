@@ -14,23 +14,11 @@ public class JsonDataContext : DataContext {
             Debug.LogWarning("File does not exist at " + filePath);
             return;
         }
-        else {
-            Debug.Log("File exists at " + filePath);
-        }
 
         // Read the JSON file asynchronously
         using (var reader = new StreamReader(filePath)) {
             var json = await reader.ReadToEndAsync();
             JsonUtility.FromJsonOverwrite(json, data);
-            // Debug.Log("Data loaded from " + filePath);
-            Debug.Log(json);
-            // if (data != null) {
-            //     Debug.Log("data exist in Load() ---> " + data);
-            // }
-
-            if (data.Items != null) {
-                Debug.Log("data.Items exist in Load() ---> " + data.Items.Count);
-            }
         }
     }
 
@@ -43,6 +31,6 @@ public class JsonDataContext : DataContext {
             await writer.WriteAsync(json);
         }
 
-        // Debug.Log("Data saved to " + filePath);
+         Debug.Log("Data saved to " + filePath);
     }
 }
