@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 8755253262902851569}
   - component: {fileID: 2850213350201853041}
   m_Layer: 5
-  m_Name: Price Text
+  m_Name: ItemPriceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -710.69415, y: 258.3883}
-  m_SizeDelta: {x: 298.9562, y: 403.6701}
+  m_SizeDelta: {x: 300, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6095527288314079442
 GameObject:
@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 6469233099352548428}
   - component: {fileID: 806119975585561072}
   m_Layer: 5
-  m_Name: Name Text
+  m_Name: ItemNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
