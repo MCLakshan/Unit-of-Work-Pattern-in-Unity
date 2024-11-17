@@ -10,11 +10,7 @@ This Unity project is a demonstration of **Repository Pattern** and **Unit of Wo
 2. [Features](#features)  
 3. [Technologies Used](#technologies-used)  
 4. [Project Structure](#project-structure)  
-5. [Getting Started](#getting-started)  
-6. [How It Works](#how-it-works)  
-7. [Screenshots](#screenshots)  
-8. [Contributing](#contributing)  
-9. [License](#license)  
+5. [How It Works](#how-it-works)    
 
 ---
 
