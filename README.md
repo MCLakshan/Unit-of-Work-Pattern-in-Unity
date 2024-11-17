@@ -2,6 +2,8 @@
 
 This Unity project is a demonstration of **Repository Pattern** and **Unit of Work Pattern** applied in a practical shop system. It integrates clean code principles, structured data handling with JSON, and dynamic UI updates to offer an educational experience for developers.
 
+![Project Screenshot](image.png)
+
 ---
 
 ## **Table of Contents**
